@@ -1,4 +1,4 @@
-package com.example.roomdata
+package com.example.uselessapp
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -8,22 +8,21 @@ import kotlinx.coroutines.launch
 
 class UsefulViewModel(application: Application):AndroidViewModel(application) {
     //Maintain a references to the Repository
-    private val usefulRepository:UsefulRepository
+    private val usefulRepository:com.example.uselessapp.UsefulRepository
     //Maintain a copy of the useful record
-    val allUseful:LiveData<List<Useful>>
+    val allUseful:LiveData<List<com.example.uselessapp.Useful>>
 
     init {
-        val usefulDao = UsefulDatabase
-            .getDatabase(application)
+        val usefulDao = com.example.uselessapp.UsefulDatabase.Companion.getDatabase(application)
             .usefulDao()
 
-        usefulRepository= UsefulRepository(usefulDao)
+        usefulRepository= com.example.uselessapp.UsefulRepository(usefulDao)
         allUseful=usefulRepository.allUseful
     }
 
     //Create a coroutine function to insert data in
     //backgrounf thread
-    fun insertUseful(useful:Useful)=viewModelScope.launch {
+    fun insertUseful(useful:com.example.uselessapp.Useful)=viewModelScope.launch {
         usefulRepository.insertUseful(useful)
     }
 }

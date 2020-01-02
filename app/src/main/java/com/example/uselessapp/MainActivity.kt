@@ -1,4 +1,4 @@
-package com.example.roomdata
+package com.example.uselessapp
 
 import android.app.Activity
 import android.content.Intent
@@ -16,20 +16,20 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var usefulViewModel: UsefulViewModel
+    private lateinit var usefulViewModel: com.example.uselessapp.UsefulViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(com.example.roomdata.R.layout.activity_main)
 
 
         //Initialize a RecycleView adapter
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = UsefulAdapter(this)
+        val recyclerView = findViewById<RecyclerView>(com.example.roomdata.R.id.recyclerview)
+        val adapter = com.example.uselessapp.UsefulAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         //Initialize the ViewModel
-        usefulViewModel= ViewModelProvider(this).get(UsefulViewModel::class.java)
+        usefulViewModel= ViewModelProvider(this).get(com.example.uselessapp.UsefulViewModel::class.java)
         usefulViewModel.allUseful.observe(this, Observer { words ->
             // Update the cached copy of the words in the adapter.
             words?.let { adapter.setUsefulRecords(it) }
@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
 
 
         fab.setOnClickListener{
-            val intent = Intent(this, AddActivity::class.java)
-            startActivityForResult(intent,REQUEST_CODE)
+            val intent = Intent(this, com.example.uselessapp.AddActivity::class.java)
+            startActivityForResult(intent,com.example.uselessapp.MainActivity.Companion.REQUEST_CODE)
         }
 
     }
@@ -46,14 +46,14 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == REQUEST_CODE) {
+        if(requestCode == com.example.uselessapp.MainActivity.Companion.REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 //TODO : Save a useful record to the database
                 data?.let {
-                    val useful = Useful(
+                    val useful = com.example.uselessapp.Useful(
                         0,
-                        it.getStringExtra(AddActivity.EXTRA_NAME),
-                        it.getStringExtra(AddActivity.EXTRA_AGE).toInt()
+                        it.getStringExtra(com.example.uselessapp.AddActivity.Companion.EXTRA_NAME),
+                        it.getStringExtra(com.example.uselessapp.AddActivity.Companion.EXTRA_AGE).toInt()
                     )
                     usefulViewModel.insertUseful(useful)
                     Toast.makeText(this, "Record saved", Toast.LENGTH_SHORT).show()

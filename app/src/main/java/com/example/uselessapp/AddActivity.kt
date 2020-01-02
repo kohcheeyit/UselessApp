@@ -1,4 +1,4 @@
-package com.example.roomdata
+package com.example.uselessapp
 
 import android.app.Activity
 import android.content.Intent
@@ -11,7 +11,7 @@ class AddActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add)
+        setContentView(com.example.roomdata.R.layout.activity_add)
 
         buttonSave.setOnClickListener {
             saveUser()
@@ -20,19 +20,19 @@ class AddActivity : AppCompatActivity() {
     }
     private fun saveUser(){
         if(TextUtils.isEmpty(editTextName.text)){
-            editTextName.setError(getString(R.string.error_value_required))
+            editTextName.setError(getString(com.example.roomdata.R.string.error_value_required))
             return
         }
         if(TextUtils.isEmpty(editTextAge.text)){
-            editTextAge.setError(getString(R.string.error_value_required))
+            editTextAge.setError(getString(com.example.roomdata.R.string.error_value_required))
             return
         }
         val name = editTextName.text.toString()
         val age = editTextAge.text.toString()
 
         val intent = Intent()
-        intent.putExtra(EXTRA_NAME, name)
-        intent.putExtra(EXTRA_AGE, age)
+        intent.putExtra(com.example.uselessapp.AddActivity.Companion.EXTRA_NAME, name)
+        intent.putExtra(com.example.uselessapp.AddActivity.Companion.EXTRA_AGE, age)
 
         setResult(Activity.RESULT_OK, intent)
 
