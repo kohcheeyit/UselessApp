@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UselessApp</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="add">Add</string>
+    <string name="hint_word">Word...</string>
+    <string name="button_save">Save</string>
+    <string name="error_value_required">Value is required</string>
+    <string name="error_record_not_saved">Record not saved</string>
+    <string name="record_saved">Record saved</string>
+</resources>
